@@ -1,0 +1,39 @@
+<html>
+    <head></head>
+    <body>
+        <h1>Ejemplo File Upload & Download</h1>
+        <form method="POST" action="{% url 'home' %}" enctype="multipart/form-data">{% csrf_token %}
+            <div><label>Descripcion del archivo</label>{{form.file_description}}</div>
+            <div><label>Seleccione el archivo</label> {{form.file_upload}}</div>
+            <div><button type="submit">Enviar</button></div>
+        </form>
+        <hr>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Descripcion
+                        </th>
+                        <th>
+                            link
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for archivo in archivos %}
+                        <tr>
+                            <td>{{archivo.id}}</td>
+                            <td>{{archivo.file_description}}</td>
+                            <td><a target="__blank" href="/media/{{archivo.file_upload}}">descargar</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </body>
+</html>
